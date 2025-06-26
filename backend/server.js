@@ -1,20 +1,23 @@
-
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const authRoutes = require('./routes/auth');
-
 const app = express();
-app.use(cors({
-  origin: 'http://localhost:3000', // ✅ React app URL
-credentials: true,
-}));
+const port = "3008";
+
+const authRoutes = require('./routes/auth');
 
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 app.use('/api/auth', authRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

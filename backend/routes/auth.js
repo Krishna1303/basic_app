@@ -4,10 +4,12 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db');
 const router = express.Router();
 
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = "1303";
 
 // Signup
 router.post('/signup', async (req, res) => {
+  console.log('Received signup request:', req.body);
+
   const { username, password } = req.body;
   const userCheck = await pool.query('SELECT * FROM users WHERE username=$1', [username]);
   if (userCheck.rows.length) return res.status(400).json({ error: 'User already exists' });
