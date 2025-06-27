@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Signup() {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [phoneno, setPhoneno] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -12,7 +15,10 @@ function Signup() {
     try {
           await axios.post('http://localhost:3008/api/auth/signup', {
       username: username,
-      password: password
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+      phoneno: phoneno
     }, {
       headers: {
         'Content-Type': 'application/json'
@@ -30,6 +36,24 @@ function Signup() {
     <div className="auth-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <input
+          value={firstname}
+          onChange={e => setFirstname(e.target.value)}
+          placeholder="First Name"
+          required
+        />
+        <input
+          value={lastname}
+          onChange={e => setLastname(e.target.value)}
+          placeholder="Last Name"
+          required
+        />
+        <input
+          value={phoneno}
+          onChange={e => setPhoneno(e.target.value)}
+          placeholder="Phone Number"
+          required
+        />
         <input
           value={username}
           onChange={e => setUsername(e.target.value)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [message, setMessage] = useState('');
@@ -27,10 +27,16 @@ function Dashboard() {
     navigate('/');
   };
 
+
   return (
     <>
+            <div className="auth-container">
       <h2>{message}</h2>
       <button onClick={logout}>Logout</button>
+      <div className="switch-link">
+        <p><Link to="/profile">Get your profile</Link></p>
+      </div>
+      </div>
     </>
   );
 }
