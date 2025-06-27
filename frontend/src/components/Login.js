@@ -13,8 +13,8 @@ function Login() {
       const res = await axios.post('http://localhost:3008/api/auth/login', { username, password });
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
-    } catch {
-      alert('Login failed');
+    } catch (error) {
+      alert('Login failed', error.response.data.error || '');
     }
   };
 

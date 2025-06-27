@@ -11,8 +11,8 @@ function Signup() {
     e.preventDefault();
     try {
           await axios.post('http://localhost:3008/api/auth/signup', {
-      username: 'testuser',
-      password: '123456'
+      username: username,
+      password: password
     }, {
       headers: {
         'Content-Type': 'application/json'
@@ -21,8 +21,8 @@ function Signup() {
       alert('Signup successful');
       navigate('/');
     } catch (error) {
-      alert('Signup failed' + error.response || '');
-      console.error('Signup error:', error);
+      alert('Signup failed' + error.response.data.error || '');
+      console.error('Signup error:', error.response);
     }
   };
 
